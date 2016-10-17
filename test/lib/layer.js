@@ -13,6 +13,7 @@ describe('Layer', function() {
   it('composes multiple callbacks/middlware', function(done) {
     var app = koa();
     var router = new Router();
+
     app.use(router.routes());
     router.get(
       '/:category/:title',
@@ -25,6 +26,7 @@ describe('Layer', function() {
         yield next;
       }
     );
+
     request(http.createServer(app.callback()))
     .get('/programming/how-to-node')
     .expect(204)
@@ -38,6 +40,7 @@ describe('Layer', function() {
     it('captures URL path parameters', function(done) {
       var app = koa();
       var router = new Router();
+
       app.use(router.routes());
       router.get('/:category/:title', function *(next) {
         this.should.have.property('params');
@@ -46,6 +49,7 @@ describe('Layer', function() {
         this.params.should.have.property('title', 'this');
         this.status = 204;
       });
+
       request(http.createServer(app.callback()))
       .get('/match/this')
       .expect(204)
