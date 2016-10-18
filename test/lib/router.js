@@ -21,7 +21,7 @@ describe('Router', function() {
     done();
   });
 
-  it('does not register middleware more than once (gh-184)', function (done) {
+  it.only('does not register middleware more than once (gh-184)', function (done) {
     var app = koa();
     var parentRouter = new Router();
     var nestedRouter = new Router();
